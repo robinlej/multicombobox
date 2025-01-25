@@ -1,0 +1,174 @@
+:host {
+    --combobox-width: 200px;
+    --combobox-border-color: darkgrey;
+    --combobox-gap: 0.3rem;
+
+    --input-border-radius: 5px;
+    --input-padding: 0.5rem 1rem;
+
+    --listbox-background: white;
+    --option-padding: 0.5rem 1rem;
+
+    --highlight-background: #f2f3ff;
+    --highlight-outline-color: hsl(from var(--highlight-background) h calc(s + 40) calc(l - 20));
+    --highlight-outline-color-checked: hsl(from var(--highlight-background) h calc(s - 20) l);
+
+    --checked-background: rgb(58, 57, 57);
+    --checked-color: white;
+
+    --tag-background: #fff2f2;
+    --tag-color: #302e2e;
+    --tag-border-radius: 999px;
+    --tag-border-color: hsl(from var(--tag-background) h calc(s + 20) calc(l - 15));
+    --tag-font-size: 0.8rem;
+    --tag-gap: 0.5rem;
+    /* --tag-font-family: sans-serif; */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    gap: var(--tag-gap, 0.5rem);
+}
+
+.tag {
+    width: max-content;
+    display: flex;
+    background-color: var(--tag-background);
+    border-radius: var(--tag-border-radius);
+    border: 1px solid var(--tag-border-color);
+    padding: 0.2rem 0.5rem;
+    color: var(--tag-color);
+    font-family: var(--tag-font-family);
+    font-size: var(--tag-font-size);
+}
+
+.tag button {
+    all: unset;
+    outline: revert;
+    cursor: pointer;
+    position: relative;
+    right: -0.3em;
+    top: -0.3em;
+    width: 1.3em;
+    aspect-ratio: 1;
+    border-radius: 50%;
+}
+
+.tag button:disabled {
+    cursor: unset;
+    color: grey;
+}
+
+.tag button::after {
+    content: "×";
+    position: absolute;
+    font-weight: bold;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    text-align: center;
+}
+
+/* Make the button surface "bleed" outside its scope for better pointer accessibility. */
+.tag button::before {
+    content: "";
+    position: absolute;
+    width: 2em;
+    aspect-ratio: 1;
+    top: 0;
+    right: 0;
+}
+
+.combobox-container {
+    position: relative;
+    width: max-content;
+    display: grid;
+}
+
+.searchbox {
+    padding: var(--input-padding);
+    border-radius: var(--input-border-radius);
+    border: 1px solid var(--combobox-border-color);
+    width: var(--combobox-width);
+}
+
+.delete-value {
+    background-color: var(--listbox-background);
+    position: absolute;
+    right: 0.3rem;
+    display: grid;
+    place-self: center;
+    place-content: center;
+    height: 1rem;
+    aspect-ratio: 1;
+    color: grey;
+    border-radius: 999px;
+    border: 1px solid grey;
+    cursor: pointer;
+    transition: background-color 0.3s ease-out;
+}
+
+.delete-value:hover,
+.delete-value:focus-visible {
+    background-color: grey;
+    color: white;
+}
+
+.listbox {
+    list-style: none;
+    position: absolute;
+    display: none;
+    padding: 0;
+    background: var(--listbox-background);
+    border: 1px solid var(--combobox-border-color);
+    overflow: auto;
+    max-height: 250px;
+    width: var(--combobox-width);
+    z-index: 1;
+}
+
+.listbox:not(.top) {
+    margin-top: var(--combobox-gap);
+}
+
+.listbox.top {
+    margin-bottom: var(--combobox-gap);
+}
+
+:host([open]) .listbox {
+    display: block;
+}
+
+.option {
+    cursor: pointer;
+    text-align: center;
+    padding: var(--option-padding);
+    width: 100%;
+    position: relative;
+}
+
+.option:where(:hover, [aria-current="true"]) {
+    box-shadow: inset 2px 2px var(--highlight-outline-color),
+        inset -2px -2px var(--highlight-outline-color);
+    background-color: var(--highlight-background);
+}
+
+.option:is([aria-checked="true"], [aria-selected="true"]):where(:hover, [aria-current="true"]) {
+    box-shadow: inset 2px 2px var(--highlight-outline-color-checked),
+        inset -2px -2px var(--highlight-outline-color-checked);
+}
+
+.option:is([aria-checked="true"], [aria-selected="true"]) {
+    background-color: var(--checked-background);
+    color: var(--checked-color);
+}
+
+.hidden {
+    display: none;
+}
