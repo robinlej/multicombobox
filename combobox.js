@@ -191,7 +191,7 @@
             if (!this.#shadow.adoptedStyleSheets.length) {
                 const stylesheet = new CSSStyleSheet();
                 const cssURL = new URL(scriptSrc);
-                cssURL.pathname = "combobox.css";
+                cssURL.pathname = cssURL.pathname.replace(/js$/, "css");
                 const response = await fetch(cssURL);
                 const styles = await response.text();
                 stylesheet.replaceSync(styles);
@@ -669,7 +669,9 @@
                 case true:
                     if (this.hasVisibleOptions) {
                         const searchRect = this.els.searchInput.getBoundingClientRect();
-                        const openAbove = window.innerHeight - searchRect.bottom < 250;
+                        const openAbove =
+                            window.innerHeight - searchRect.bottom <
+                            parseInt(getComputedStyle(this.els.listbox).height);
                         this.els.listbox.classList.toggle("top", openAbove);
                         if (openAbove) {
                             this.els.listbox.style.bottom = searchRect.height + "px";

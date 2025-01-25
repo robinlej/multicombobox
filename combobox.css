@@ -1,12 +1,17 @@
 :host {
-    --combobox-width: 200px;
-    --combobox-border-color: darkgrey;
+    --combobox-width: 300px;
     --combobox-gap: 0.3rem;
+    --combobox-border-color: darkgrey;
+    --combobox-color: #222;
+    /* --combobox-font-family */
 
     --input-border-radius: 5px;
     --input-padding: 0.5rem 1rem;
+    /* --input-box-shadow */
 
+    --listbox-height: 50vh;
     --listbox-background: white;
+    --option-align: center;
     --option-padding: 0.5rem 1rem;
 
     --highlight-background: #f2f3ff;
@@ -87,7 +92,7 @@
 
 .combobox-container {
     position: relative;
-    width: max-content;
+    width: var(--combobox-width);
     display: grid;
 }
 
@@ -95,7 +100,10 @@
     padding: var(--input-padding);
     border-radius: var(--input-border-radius);
     border: 1px solid var(--combobox-border-color);
-    width: var(--combobox-width);
+    width: 100%;
+    font-family: var(--combobox-font-family);
+    color: var(--combobox-color);
+    box-shadow: var(--input-box-shadow);
 }
 
 .delete-value {
@@ -125,10 +133,12 @@
     position: absolute;
     display: none;
     padding: 0;
+    color: var(--combobox-color);
+    font-family: var(--combobox-font-family);
     background: var(--listbox-background);
     border: 1px solid var(--combobox-border-color);
     overflow: auto;
-    max-height: 250px;
+    max-height: var(--listbox-height, 50vh);
     width: var(--combobox-width);
     z-index: 1;
 }
@@ -147,7 +157,7 @@
 
 .option {
     cursor: pointer;
-    text-align: center;
+    text-align: var(--option-align);
     padding: var(--option-padding);
     width: 100%;
     position: relative;

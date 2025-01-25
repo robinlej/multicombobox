@@ -25,7 +25,7 @@
 ### Multi values
 
 ```html
-<multi-combobox autocomplete="list|false" multi="true" tags="true">
+<multi-combobox autocomplete="list|false" multiple="true" tags="true">
     <ul>
         <li data-id="1" selected></li>
         <li data-id="2" selected></li>
@@ -51,21 +51,21 @@ Note: the `<ul>` is mandatory.
 
 ### Combobox Attributes
 
-| Attribute      | Default   | Possible values                    | Info                                                                  |
-| -------------- | --------- | ---------------------------------- | --------------------------------------------------------------------- |
-| `autocomplete` | `"false"` | `"list"` \| `"false"`              |                                                                       |
-| `multi`        | `false`   | `"true"` (or nothing)              | Any other value will default to `"true"`                              |
-| `tags`         | `false`   | `"true"` (or nothing)              | Any other value will default to `"true"`. Not usable without `multi`. |
-| `required`     | not set   | `"true"` (or nothing)              | At least one option must be selected for the form to be valid.        |
-| `placeholder`  | not set   | any                                |                                                                       |
-| `autofocus`    | `false`   | `""` \| `"autofocus"` (or nothing) | Like regular inputs, updating the attribute after page load will not change the behavior. Note that, like regular inputs, while `""` is an accepted value for the attribute, `this.autofocus` takes a truthy value to be active.         |
+| Attribute      | Default   | Possible values                    | Info                                                                                                                                                                                                                             |
+| -------------- | --------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `autocomplete` | `"false"` | `"list"` \| `"false"`              | If set on `list`, list will only display options matching the search                                                                                                                                                             |
+| `multiple`     | `false`   | `"true"` (or nothing)              | Any other value will default to `"true"`                                                                                                                                                                                         |
+| `tags`         | `false`   | `"true"` (or nothing)              | Any other value will default to `"true"`. Not usable without `multiple`.                                                                                                                                                         |
+| `required`     | not set   | `"true"` (or nothing)              | At least one option must be selected for the form to be valid.                                                                                                                                                                   |
+| `placeholder`  | not set   | any                                |                                                                                                                                                                                                                                  |
+| `autofocus`    | `false`   | `""` \| `"autofocus"` (or nothing) | Like regular inputs, updating the attribute after page load will not change the behavior. Note that, like regular inputs, while `""` is an accepted value for the attribute, `this.autofocus` takes a truthy value to be active. |
 
 ### Options Attributes
 
-| Attribute  | Default | Possible values | Info                                                                                                                                                                                                                             |
-| ---------- | ------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `data-id`  |         | any             | Mandatory (each one must be different)                                                                                                                                                                                           |
-| `selected` | `false` | `"true"`        | If `multi="true"`, you can pre-select as many values as you want. If `multi="false"` (or not set), you can pre-select only one value. In that case, if there are other selected values, only the first one will be used as such. |
+| Attribute  | Default | Possible values | Info                                                                                                                                                                                                                                   |
+| ---------- | ------- | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `data-id`  |         | any             | Mandatory (each one must be different)                                                                                                                                                                                                 |
+| `selected` | `false` | `"true"`        | If `multiple="true"`, you can pre-select as many values as you want. If `multiple="false"` (or not set), you can pre-select only one value. In that case, if there are other selected values, only the first one will be used as such. |
 
 ## Customize the CSS
 
@@ -76,10 +76,15 @@ To customize the CSS, define the custom properties on the \<multi-combobox\> ele
 | `--combobox-width`                  | `200px`                                                             | Used for the input and the listbox                      |
 | `--combobox-border-color`           | `darkgrey`                                                          | Used for the input and the listbox                      |
 | `--combobox-gap`                    | `0.3rem`                                                            | Gap between the input and the listbox when it's open    |
+| `--combobox-font-family`            | /                                                                   |                                                         |
+| `--combobox-color`                  | `#222`                                                              | Color of the text in the combobox (not highlighted)     |
 | `--input-border-radius`             | `5px`                                                               | Border radius for the input                             |
 | `--input-padding`                   | `0.5rem 1rem`                                                       | Padding for the input                                   |
+| `--input-box-shadow`                | /                                                                   |                                                         |
+| `--listbox-height`                  | `50vh`                                                              | Max height of the opened listbox                        |
 | `--listbox-background`              | `white`                                                             | Background of the listbox                               |
 | `--option-padding`                  | `0.5rem 1rem`                                                       | Padding of each option                                  |
+| `--option-align`                    | `center`                                                            | Text align for the listbox options                      |
 | `--highlight-background`            | `#f2f3ff`                                                           | Background color when hovering / focus set on an option |
 | `--highlight-outline-color`         | `hsl(from var(--highlight-background) h calc(s + 40) calc(l - 20))` | Outline when hovering / focus set on an option          |
 | `--highlight-outline-color-checked` | `hsl(from var(--highlight-background) h calc(s - 20) l)`            | Outline when hovering / focusing a checked option       |
